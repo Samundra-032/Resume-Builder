@@ -1,0 +1,9 @@
+.venv/
+.vscode/
+.pytest_cache/
+
+**/migrations/*.py
+**/migrations/*.pyc
+
+*.env
+db.sqlite3

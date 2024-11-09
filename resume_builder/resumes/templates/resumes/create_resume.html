@@ -1,0 +1,168 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Resume</title>
+    <link rel="stylesheet" href="{% static 'resumes/css/style.css' %}">
+</head>
+<body>
+    <h1>Create Your Resume</h1>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+
+        <h2>Education</h2>
+        <div id="education-container">
+            {{ education_formset.management_form }}
+            {% for form in education_formset %}
+                <div class="formset-form education-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="add-button" onclick="addForm('education-container', 'education-form')">Add Education</button>
+
+        <h2>Experience</h2>
+        <div id="experience-container">
+            {{ experience_formset.management_form }}
+            {% for form in experience_formset %}
+                <div class="formset-form experience-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="add-button" onclick="addForm('experience-container', 'experience-form')">Add Experience</button>
+
+        <h2>Skills</h2>
+        <div id="skills-container">
+            {{ skill_formset.management_form }}
+            {% for form in skill_formset %}
+                <div class="formset-form skills-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="add-button" onclick="addForm('skills-container', 'skills-form')">Add Skill</button>
+
+        <h2>Projects</h2>
+
+        <div id="projects-container">
+            {{ project_formset.management_form }}
+            {% for form in project_formset %}
+                <div class="formset-form project-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('projects-container', 'project-form')">Add Project</button>
+
+        <h2>Extra-Curricular Activities</h2>
+        <div id="activities-container">
+            {{ activity_formset.management_form }}
+            {% for form in activity_formset %}
+                <div class="formset-form activity-form">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('activities-container', 'activity-form')">Add Activity</button>
+        <button type="submit" class="submit-button">Generate PDF</button>
+    </form>
+    <script src="{% static 'resumes/js/formset.js' %}"></script>
+</body>
+</html>
+{% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Resume</title>
+    <link rel="stylesheet" href="{% static 'resumes/css/style.css' %}">
+</head>
+<body>
+    <h1>Create Your Resume</h1>
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+
+        <!-- Education Section -->
+        <h2>Education</h2>
+        <div id="education-container">
+            {{ education_formset.management_form }}
+            {% for form in education_formset %}
+                <div class="formset-form education-form">
+                    {{ form.as_p }}
+                    {% if forloop.counter > 1 %}
+                        <button type="button" onclick="deleteForm(this.parentNode, 'education-container')" class="delete-button">Delete</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('education-container', 'education-form')">Add Education</button>
+
+        <!-- Experience Section -->
+        <h2>Experience</h2>
+        <div id="experience-container">
+            {{ experience_formset.management_form }}
+            {% for form in experience_formset %}
+                <div class="formset-form experience-form">
+                    {{ form.as_p }}
+                    {% if forloop.counter > 1 %}
+                        <button type="button" onclick="deleteForm(this.parentNode, 'experience-container')" class="delete-button">Delete</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('experience-container', 'experience-form')">Add Experience</button>
+
+        <!-- Skills Section -->
+        <h2>Skills</h2>
+        <div id="skills-container">
+            {{ skill_formset.management_form }}
+            {% for form in skill_formset %}
+                <div class="formset-form skills-form">
+                    {{ form.as_p }}
+                    {% if forloop.counter > 1 %}
+                        <button type="button" onclick="deleteForm(this.parentNode, 'skills-container')" class="delete-button">Delete</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('skills-container', 'skills-form')">Add Skill</button>
+
+        <!-- Projects Section -->
+        <h2>Projects</h2>
+        <div id="projects-container">
+            {{ project_formset.management_form }}
+            {% for form in project_formset %}
+                <div class="formset-form project-form">
+                    {{ form.as_p }}
+                    {% if forloop.counter > 1 %}
+                        <button type="button" onclick="deleteForm(this.parentNode, 'projects-container')" class="delete-button">Delete</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('projects-container', 'project-form')">Add Project</button>
+
+        <!-- Extra-Curricular Activities Section -->
+        <h2>Extra-Curricular Activities</h2>
+        <div id="activities-container">
+            {{ activity_formset.management_form }}
+            {% for form in activity_formset %}
+                <div class="formset-form activity-form">
+                    {{ form.as_p }}
+                    {% if forloop.counter > 1 %}
+                        <button type="button" onclick="deleteForm(this.parentNode, 'activities-container')" class="delete-button">Delete</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addForm('activities-container', 'activity-form')">Add Activity</button>
+
+        <button type="submit" class="submit-button">Generate PDF</button>
+    </form>
+    <script src="{% static 'resumes/js/formset.js' %}"></script>
+</body>
+</html>
