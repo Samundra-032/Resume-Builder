@@ -8,6 +8,17 @@ from .models import Profile, Education, Experience, Skill, Project, ExtraCurricu
 from .forms import ProfileForm, EducationForm, ExperienceForm, SkillForm, ProjectForm, ExtraCurricularForm
 from django.forms import modelformset_factory
 
+
+# def home(request):
+#     return HttpResponse("This is home page proceed to other url")
+
+def home(request):
+    html = "<h1>This is home page proceed to other url</h1>"
+    return HttpResponse(html)
+
+# def home(request):
+#     return render(request, 'resume/create_resume.html')
+
 def create_resume(request):
     # Formsets for handling multiple entries in each section
     EducationFormSet = modelformset_factory(Education, form=EducationForm, extra=1)
